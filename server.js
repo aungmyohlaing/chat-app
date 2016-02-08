@@ -84,7 +84,7 @@ function userExist(req, res, next) {
 
 
 
-//app.enable('verbose errors');
+app.enable('verbose errors');
 
 
 app.get('/', function (req, res) {
