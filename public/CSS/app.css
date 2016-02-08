@@ -1,0 +1,57 @@
+body {
+  font-family: Consolas, monospace;
+  /*max-width: 700px;*/
+  margin-left: auto;
+  margin-right: auto;
+  padding-top:90px;
+  font-size: 16px;
+}
+
+#dashboard {
+  padding: 00px 15px;
+}
+
+.border {
+  border: solid 1px silver;
+  padding: 3px;
+}
+
+.tweet {
+  margin-bottom: 20px;
+  padding: 10px;
+}
+
+.profile-pic {
+  border: solid 1px silver;
+  padding: 3px;
+  width: 56px;
+  height: 56px;
+}
+
+.wordwrap {
+  white-space: pre-wrap;       /* css-3 */
+  white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+  white-space: -pre-wrap;      /* Opera 4-6 */
+  white-space: -o-pre-wrap;    /* Opera 7 */
+  word-wrap: break-word;       /* Internet Explorer 5.5+ */
+}
+
+.importantTag {
+  font-weight: 900;
+}
+
+/* nav_bar hack */
+
+.navbar-inverse{
+    background-color:#00796B !important;
+    border-color:#00796B !important;
+}
+
+.navbar-inverse .navbar-brand{
+    color:white !important;
+}
+
+.navbar-inverse-bottom{
+    background-color:#CFD8DC;
+    border-color:#CFD8DC;
+}
