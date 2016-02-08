@@ -1,0 +1,31 @@
+body, html {
+    height: 100%;
+    background-repeat: no-repeat;
+    background-color: #00796B;   
+}
+
+.container-thanks-box{
+    display: block !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    float:none !important;
+}
+
+.card-container.card {    
+    padding: 40px 40px;
+    
+}
+
+.card {
+    background-color: #fff;
+    /* just in case there no content*/
+    padding: 20px 25px 30px;   
+    margin-top: 50px;
+    /* shadows and rounded borders */
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+}

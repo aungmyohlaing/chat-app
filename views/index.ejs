@@ -1,0 +1,137 @@
+<html>
+  <head>
+    <title>Zap Chat App</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--<script src="/public/JS/jquery-1.8.0.js"></script>-->
+    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <!--<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.2.min.js"></script>-->
+    <script src="/socket.io/socket.io.js"></script>        
+    <script src="/public/JS/bootstrap-notify.js"></script>
+    
+    
+    
+    <link rel="stylesheet" href="/public/CSS/bootstrap.css" />
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    
+    <script src="/public/JS/bootstrap.js"></script>
+    <link rel="stylesheet" href="/public/CSS/app.css" />
+    <link rel="stylesheet" href="/public/CSS/home.css" />
+    <link rel="stylesheet" href="/public/CSS/animate.css" />
+    
+    <!-- convert unicode emoji to images -->
+    <script src="//cdn.jsdelivr.net/emojione/2.0.1/lib/js/emojione.min.js"></script>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/emojione/2.0.1/assets/css/emojione.min.css"/>
+    <!--  END convert unicode emoji to images -->
+    
+    <!-- emoji picker  -->
+    <link rel="stylesheet" type="text/css" href="/public/css/jquery.emojipicker.css">
+    <script type="text/javascript" src="/public/js/jquery.emojipicker.js"></script>
+    <!-- END emoji picker  -->
+    
+    <!-- Emoji Data -->
+    <link rel="stylesheet" type="text/css" href="/public/css/jquery.emojipicker.a.css">
+    <script type="text/javascript" src="/public/js/jquery.emojis.js"></script>
+ 
+  </head>
+  <body>
+    
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" >
+      <div class="container-fluid" id="navfluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">ZAP-Chat</a>
+        </div>
+        <!--<ul class="nav navbar-nav navbar-right">
+            <li><span class="navbar-ac-name"><img id="online-icon" class="online-icon" src="/public/images/online-status.png" /><%=uname%></span></li>
+            <li><a href="/" class="navbar-ac-name"><span class=""><img id="logout-icon" src="/public/images/logout-icon.png" /></span> Logout</a></li>
+        </ul>-->
+        <div class="collapse navbar-collapse navbar-right" id="navigatinobar" >
+          <ul class="nav navbar-nav">
+                <li><span class="navbar-ac-name"><img id="online-icon" class="online-icon" src="/public/images/online-status.png" /><%=uname%></span></li>
+                <li><a href="/" class="navbar-ac-name"><span class=""><img id="logout-icon" src="/public/images/logout-icon.png" /></span> Logout</a></li>
+          </ul>
+        </div><!--/.nav-collapse--> 
+      </div>
+    </nav>
+    
+    <div style="clear:both;"/> 
+    
+    <div class="container">
+            <div class="row">
+                <div class="col-lg-12" >
+                    <div class="text-center"><img id="profile-img" class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" /> </div>
+                </div>
+            </div>
+            <hr/>
+            <div class="row">
+                <div class="col-lg-12" >
+                    <div id="username" class="text-center user-name"><%= uname %></div>
+                </div>
+            </div>
+            <br/>
+            <div class="row">            
+               
+                <div class="col-md-8 col-md-offset-2 " >
+                    <div class="col-md-12 ">                    
+                        <div id="dashboard" class="chat-box-card">
+                            <div class="row"><div id="title" class="chat-box-title">Let's Chat</div></div>
+                            <div class="row chat-box-bg" />                              
+                                <div class="chat-box" >                            
+                                    <div id="conversation"></div>                                                                                                                 
+                                </div>                       
+                            </div>
+                        
+                            <div class="row chat-box-bg">
+                                <div >                                                        
+                                    <input class="col-md-12 form-control" id="data" placeholder="send message" />
+                                    <!--<textarea class="col-md-12 form-control" id="data" placeholder="send message" />   
+                                    </textarea>-->
+                                    <!--<div contenteditable="true" lass="col-md-12 form-control" id="data" placeholder="send message" style="background-color:white;height:35px;">
+                                        
+                                    </div>-->                                                 
+                                </div>
+                               
+                            </div>
+                                    
+                        </div>                                        
+                    </div>       
+                </div>             
+               
+             <script src="/public/JS/notify.js" ></script>
+            <script src="/public/JS/chat.js" ></script>    
+                                 
+            </div>
+        </div>  
+       <br/><br/><br/>
+        <!--<div class="navbar navbar-inverse-bottom navbar-fixed-bottom">
+            <div class="container">
+                <div class="navbar-header">                
+                    <a class="navbar-brand" href="#">Power by ZAP-interactive</a>
+                </div>
+                <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                </ul>
+                </div> 
+            </div>
+        </div> -->
+       
+        <script>
+            $(function() {
+                
+                $('#data').emojiPicker({
+                    height: $('#dashboard').height() - 35,
+                    width:  '300px'
+                  
+                 });
+                                 
+            });
+                                                                             
+        </script>
+       
+  </body>
+</html>

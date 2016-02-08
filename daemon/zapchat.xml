@@ -1,0 +1,1 @@
+<service><id>zapchat.exe</id><name>zap-chat</name><description>Chat application for team</description><executable>C:\Program Files\nodejs\node.exe</executable><arguments>--harmony "D:\zap-chat\node_modules\node-windows\lib\wrapper.js" -f "D:\zap-chat\server.js" -l "zap-chat" -g 0.25 -w 1 -r 3 -a n</arguments><logmode>rotate</logmode></service>

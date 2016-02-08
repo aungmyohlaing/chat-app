@@ -1,0 +1,52 @@
+<html>
+  <head>
+    <title>Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="/public/JS/jquery-1.8.0.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/public/JS/hollywood.js"></script>
+    <link rel="stylesheet" href="/public/CSS/bootstrap.css" />
+    <script src="/public/JS/bootstrap.js"></script>
+    <link rel="stylesheet" href="/public/CSS/app.css" />
+    <link rel="stylesheet" href="/public/CSS/login.css" />
+  </head>
+  <body>   
+
+    <div class="container">
+      <div id="dashboard">
+          <!--
+            you can substitue the span of reauth email for a input with the email and
+            include the remember me checkbox
+            -->
+            <div class="container">
+                <div class="card card-container">
+                    <!-- <img class="profile-img-card" src="//lh3.googleusercontent.com/-6V8xOA6M7BA/AAAAAAAAAAI/AAAAAAAAAAA/rzlHcD0KYwo/photo.jpg?sz=120" alt="" /> -->
+                    <img id="profile-img" class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
+                    <p id="profile-name" class="profile-name-card"></p>
+                    <form class="form-signin" method="POST" >
+                        <span id="reauth-email" class="reauth-email"></span>
+                        <input type="text" id="inputUname" name="inputUname" class="form-control" placeholder="User Name" required autofocus>
+                        <input type="password" id="inputPassword" name="inputPassword" class="form-control" placeholder="Password" required>
+                        <div id="errmsg"></div>
+                        <div id="remember" class="checkbox">
+                            <label>
+                                <input type="checkbox" value="remember-me"> I'm Awesome, Remember Me!
+                            </label>
+                        </div>
+                        <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Let's Go!</button>
+                    </form><!-- /form -->
+                    <a href="#" class="forgot-password">
+                        Forgot your password?
+                    </a>
+                    <br/>
+                    Not a member?
+                    <a href="/signup" class="forgot-password">
+                       Join Now!
+                    </a>
+                </div><!-- /card-container -->
+            </div><!-- /container -->
+        </div>
+      <script src="/public/JS/login.js"></script>
+    </div>
+  </body>
+</html>

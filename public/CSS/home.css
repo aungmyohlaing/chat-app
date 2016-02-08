@@ -1,0 +1,138 @@
+.time_panel_padding{
+    padding:50px 15px;
+}
+
+.time_panel{
+    height:150px;background-color:#009688;
+   
+}
+
+.time_panel_text{
+    font-size:48px;color:white;margin-top:40px;
+}
+
+.box_shadows{
+      /* shadows and rounded borders */
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+}
+
+.people_panel{
+    height:350px;border:1px solid #006064;
+   
+}
+
+.people_title
+{    
+    background-color:#006064;
+    color:white;
+    font-size: 13pt ;
+    padding-left:5px;
+    height:40px;
+    padding-top:8px;        
+}
+
+.people-img-card {
+    width: 36px;
+    height: 36px;
+    /*margin: 0 auto 10px;*/
+    display: block;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+    float:left;
+}
+
+.users{
+    margin-left:45px;
+    padding-top:5px;
+}
+
+.profile-img-card{
+    width: 116px;
+    height:116px;   
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+}
+
+.user-name{
+    font-size: 38pt;
+    font-weight: bold;
+}
+
+/* Chat Box CSS start*/
+
+.chat-box-card{
+    
+    border:1px solid #F5F5F5;    
+    border-radius: 10px;   
+    background-color:#00838F;
+    /*outline: 0; 
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px #757575;
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px #757575;*/
+    
+}
+
+.chat-box-title{
+    padding-left:5px;
+    height:30px;
+    line-height:30px;
+    background-color:#00838F;
+    color:white;
+    border-radius: 5px;   
+}
+
+.chat-box{
+    height:400px;
+    padding-left:5px;
+    padding-top:10px;
+    overflow-y: scroll;
+}
+
+.chat-box-bg{
+    background-color:#eeeeee;
+}
+
+/* END Chat BOX CSS */
+
+.navbar-ac-name{    
+    color:white;
+    font-size: 14px;
+    line-height: 20px;
+    position: relative;
+    display: block;
+    padding: 15px 15px;
+}
+
+.online-icon{
+    padding-right:5px;
+}
+
+
+/* hack nav bar  */
+
+.navbar-nav>li>a {
+    color:white !important;
+    
+}
+.navbar-nav>li>a:hover {
+    color:white !important;
+    
+}
+
+
+.navbar-inverse .navbar-toggle {
+    border-color:white !important;
+}
+
+.navbar-inverse .navbar-toggle:hover, .navbar-inverse .navbar-toggle:focus {
+    
+    background-color:#009688 !important;
+}
+
+/* end hack nav bar  */
