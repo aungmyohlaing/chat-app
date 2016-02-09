@@ -7,14 +7,15 @@ var bodyParser = require('body-parser');
 var nodes = { };
 var usernames = {};
 var urlencodedParser = bodyParser.urlencoded({extended:false});
-
-
+var hash = require('./public/js/pass').hash;
+var path = require ('path');
 
 server.listen(process.env.PORT || 3000);
 
+
 app.configure(function(){
     app.set('view engine', 'ejs');
-    app.set('view options', { layout: false });
+    app.set('view options', { layout: false });    
     app.use(express.methodOverride());
     app.use(express.bodyParser());  
     app.use(express.cookieParser('authentication'));
@@ -22,39 +23,40 @@ app.configure(function(){
     app.use(app.router);
     app.use('/public', express.static('public'));
     app.use('/modal',express.static('modal'));
-    app.use('/node_modules/moment',express.static('moment'));    
+    app.use('/node_modules/moment',express.static('moment'));
+    app.use(function(req,res,next){
+        var err = req.session.error,
+            msg = req.session.success;
+        
+        delete req.session.error;
+        delete req.session.success;
+        
+        res.locals.message = '';
+        if(err)res.locals.message = '<p class="msg error"' + err + '</p>';
+        if(err)res.locals.message = '<p class="msg success"' + msg + '</p>';
+        next();
+    });        
 });
 
-app.use(function(req,res,next){
-    var err = req.session.error,
-        msg = req.session.success;
-    
-    delete req.session.error;
-    delete req.session.success;
-    
-    res.locals.message = '';
-    if(err)res.locals.message = '<p class="msg error"' + err + '</p>';
-    if(err)res.locals.message = '<p class="msg success"' + msg + '</p>';
-    next();
-});
+//app.enable('verbose errors');
 
 function authenticate(name, pass, fn) {
     if (!module.parent) console.log('authenticating %s:%s', name, pass);
 
     Reg.findOne({
-        username: name
+        displayname: name
     },
-
+    
     function (err, user) {
         if (user) {
             if (err) return fn(new Error('cannot find user'));
-            //hash(pass, user.salt, function (err, hash) {
-              //  if (err) return fn(err);
-               // if (hash == user.hash) return fn(null, user);
-               // fn(new Error('invalid password'));
-            //});
-        //} else {
-          //  return fn(new Error('cannot find user'));
+            hash(pass, user.salt, function (err, hash) {
+                if (err) return fn(err);
+                if (hash == user.hash) return fn(null, user);
+                fn(new Error('invalid password'));
+            });
+        } else {
+            return fn(new Error('cannot find user'));
         }
     });
 
@@ -65,7 +67,7 @@ function requiredAuthentication(req, res, next) {
         next();
     } else {
         req.session.error = 'Access denied!';
-        res.redirect('/login');
+        res.redirect('/');
     }
 }
 
@@ -82,28 +84,23 @@ function userExist(req, res, next) {
     });
 }
 
-
-
-app.enable('verbose errors');
-
-
 app.get('/', function (req, res) {
-  res.render('login');
+  res.render('login',{message: ""});
 });
 
 app.get('/thankyou',function(req,res){
     res.render('thankyou');
 });
 
-
-
 app.get('/signup', function(req,res){
     res.render('signup',{showpop:0});
 });
 
-app.get('/', function(req,res){
-    res.render('login');
+app.get('/index', function(req,res){
+    res.render('index');
 });
+
+
 
 // -------------- Registratino module ----------------------------------------------------------------
 
@@ -117,24 +114,36 @@ app.post('/signup',urlencodedParser,function(req,res,err){
       if(err) throw err;
         if(count == 0)
         {
-           
-                var user = Reg({
+                var password = req.body.password;
+                var username = req.body.display_name;
+                                              
+                hash(password, function (err, salt, hash) {
+                if (err) throw err;
+                var user = new Reg({
                     userimage:'testing',
-                    displayname: req.body.display_name,
+                    displayname: username,
                     firstname: req.body.first_name,
                     lastname: req.body.last_name,
                     email: req.body.email,
-                    password: req.body.password,
-                    confirmpassword: req.body.password_confirmation         
-                });
-
-                user.save(function(err){
+                    password: password,            
+                    confirmpassword: req.body.password_confirmation,         
+                    salt: salt,
+                    hash: hash,
+                }).save(function (err, newUser) {
                     if (err) throw err;
-                    console.log('User Saved!');
+                    authenticate(newUser.displayname, password, function(err, user){
+                        if(user){
+                            req.session.regenerate(function(){
+                                req.session.user = user;
+                                req.session.success = 'Authenticated as ' + user.displayname + ' click to <a href="/logout">logout</a>. ' + ' You may now access <a href="/restricted">/restricted</a>.';
+                                //res.redirect('thankyou');
+                                res.render('thankyou');  
+                            });
+                        }
+                    });
                 });
-                
-                res.render('thankyou');          
-            
+            });
+                                                    
         } else {
           
             res.render('signup',{showpop:'1'});
@@ -151,32 +160,23 @@ app.post('/signup',urlencodedParser,function(req,res,err){
 
 app.post('/',urlencodedParser, function(req,res){       
     
-     Reg.count({displayname:req.body.inputUname,password:req.body.inputPassword},function(err,result){         
-         if(err) throw err;
-         
-         if(result != 0)
-         {             
-             res.render('index',{uname:req.body.inputUname,pwd:req.body.inputPassword});    
-         }
-         else {
-            //console.log('User Name or Password is incorrect.');
-            Reg.count({displayname:req.body.inputUname},function(err,data){
-                if(err) throw err;
-                
-                if(data !=0)
-                {
-                    
-                }
-                else {
-                    
-                }
-            });  
-              
-         }
-         
-         
-     });         
+    authenticate(req.body.inputUname, req.body.inputPassword, function (err, user) {
+        if (user) {
+
+            req.session.regenerate(function () {
+
+                req.session.user = user;
+                req.session.success = 'Authenticated as ' + user.displayname + ' click to <a href="/logout">logout</a>. ' + ' You may now access <a href="/restricted">/restricted</a>.';
+                res.render('index',{uname:req.body.inputUname,pwd:req.body.inputPassword});   
+            });
+        } else {
+            req.session.error = 'Authentication failed, please check your ' + ' username and password.';
+            res.render('login',{message: req.session.error});
+            //res.redirect('/');
+        }
+    });
                      
+    //res.render('index');
 });
 
 //------------------------------- End Login Module ---------------------------------------------------
@@ -265,5 +265,4 @@ app.get('/500', function(req, res, next){
 });
 
 //-------------------------------------- END ERROR Handlaing here -----------------------------------------------
-
 

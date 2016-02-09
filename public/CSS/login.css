@@ -148,3 +148,8 @@ a:hover{
 
 /* navbar background color hack*/
 
+.error{
+    font-size: 9pt;
+    color:red;
+}
+

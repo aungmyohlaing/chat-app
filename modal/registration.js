@@ -18,7 +18,9 @@ var registrationSchema = new Schema({
    lastname: String,
    email: String,
    password: String,
-   confirmpassword: String 
+   confirmpassword: String ,
+   salt: String,
+   hash: String
 });
 
 var Registration = mongoose.model('Registration',registrationSchema);
